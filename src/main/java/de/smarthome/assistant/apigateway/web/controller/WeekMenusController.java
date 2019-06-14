@@ -1,7 +1,6 @@
 package de.smarthome.assistant.apigateway.web.controller;
 
 import de.smarthome.assistant.apigateway.configuration.AsyncConfig;
-import de.smarthome.assistant.apigateway.web.dto.ListWeekMenusDto;
 import de.smarthome.assistant.apigateway.web.dto.WeekMenuDto;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +22,8 @@ public class WeekMenusController {
      */
     @Async(AsyncConfig.TASK_EXECUTOR_CONTROLLER)
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public CompletableFuture<ListWeekMenusDto> list() {
+    public CompletableFuture<List<WeekMenuDto>> list() {
         // create demo data
-        final ListWeekMenusDto listWeekMenusDto = new ListWeekMenusDto();
         final WeekMenuDto weekMenuDto_1 = new WeekMenuDto();
         weekMenuDto_1.setName("Schweinefleisch mit Klößen");
         final WeekMenuDto weekMenuDto_2 = new WeekMenuDto();
@@ -33,9 +31,8 @@ public class WeekMenusController {
         List<WeekMenuDto> weekMenuDtos = new ArrayList<>();
         weekMenuDtos.add(weekMenuDto_1);
         weekMenuDtos.add(weekMenuDto_2);
-        listWeekMenusDto.setWeekMenuDtos(weekMenuDtos);
-        final CompletableFuture<ListWeekMenusDto> listWeekMenusDtoCompletableFuture = new CompletableFuture<>();
-        listWeekMenusDtoCompletableFuture.complete(listWeekMenusDto);
+        final CompletableFuture<List<WeekMenuDto>> listWeekMenusDtoCompletableFuture = new CompletableFuture<>();
+        listWeekMenusDtoCompletableFuture.complete(weekMenuDtos);
         return listWeekMenusDtoCompletableFuture;
     }
 
@@ -59,7 +56,7 @@ public class WeekMenusController {
      */
     @Async(AsyncConfig.TASK_EXECUTOR_CONTROLLER)
     @RequestMapping(value = "/list/{searchstring}", method = RequestMethod.GET)
-    public CompletableFuture<ListWeekMenusDto> filteredList(@PathVariable("searchstring") String searchstring) {
+    public CompletableFuture<List<WeekMenuDto>> filteredList(@PathVariable("searchstring") String searchstring) {
         return null;
     }
 
