@@ -3,7 +3,6 @@ package de.smarthome.assistant.apigateway.web.dto;
 import javax.validation.constraints.NotEmpty;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode
 public class WeekMenuDto {
 
     @NotEmpty
