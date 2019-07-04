@@ -1,10 +1,9 @@
 package de.smarthome.assistant.apigateway.web.dto;
 
-import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class WeekMenuDto {
+public class Ingredient {
 
     @NotNull
     private Long id;
@@ -12,8 +11,7 @@ public class WeekMenuDto {
     @NotEmpty
     private String name;
 
-    @NotNull
-    private List<Ingredient> ingredients;
+    private String amount;
 
     public Long getId() {
         return id;
@@ -31,11 +29,11 @@ public class WeekMenuDto {
         this.name = name;
     }
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+    public String getAmount() {
+        return amount;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 }
