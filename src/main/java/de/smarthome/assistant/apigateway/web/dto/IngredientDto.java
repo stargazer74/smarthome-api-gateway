@@ -3,7 +3,7 @@ package de.smarthome.assistant.apigateway.web.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class Ingredient {
+public class IngredientDto {
 
     @NotNull
     private Long id;
