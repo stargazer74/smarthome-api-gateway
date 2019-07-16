@@ -35,7 +35,7 @@ public class WeekMenuResponseDto {
     @NotEmpty
     private String name;
 
-    private List<IngredientResponseDto> ingredientResponseDtos;
+    private List<IngredientResponseDto> ingredients;
 
     public Long getId() {
         return id;
@@ -53,11 +53,11 @@ public class WeekMenuResponseDto {
         this.name = name;
     }
 
-    public List<IngredientResponseDto> getIngredientResponseDtos() {
-        return ingredientResponseDtos;
+    public List<IngredientResponseDto> getIngredients() {
+        return ingredients;
     }
 
-    public void setIngredientResponseDtos(List<IngredientResponseDto> ingredientResponseDtos) {
-        this.ingredientResponseDtos = ingredientResponseDtos;
+    public void setIngredients(List<IngredientResponseDto> ingredients) {
+        this.ingredients = ingredients;
     }
 }

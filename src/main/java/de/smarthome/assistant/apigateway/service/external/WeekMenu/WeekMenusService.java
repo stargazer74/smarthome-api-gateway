@@ -82,7 +82,7 @@ public class WeekMenusService {
         List<IngredientResponseDto> ingredients_1 = new ArrayList<>();
         ingredients_1.add(ingredientResponse_1);
         ingredients_1.add(ingredientResponse_2);
-        weekMenuResponseDto_1.setIngredientResponseDtos(ingredients_1);
+        weekMenuResponseDto_1.setIngredients(ingredients_1);
 
         final WeekMenuResponseDto weekMenuResponseDto_2 = new WeekMenuResponseDto();
         weekMenuResponseDto_2.setId(2L);
@@ -98,7 +98,7 @@ public class WeekMenusService {
         List<IngredientResponseDto> ingredients_2 = new ArrayList<>();
         ingredients_2.add(ingredientResponse_3);
         ingredients_2.add(ingredientResponse_4);
-        weekMenuResponseDto_2.setIngredientResponseDtos(ingredients_2);
+        weekMenuResponseDto_2.setIngredients(ingredients_2);
 
         List<WeekMenuResponseDto> weekMenuResponseDtos = new ArrayList<>();
         weekMenuResponseDtos.add(weekMenuResponseDto_1);
