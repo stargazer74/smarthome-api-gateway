@@ -26,7 +26,11 @@ package de.smarthome.assistant.apigateway.service.external.WeekMenu.dto;
 import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class WeekMenuResponseDto {
 
     @NotNull
@@ -36,28 +40,4 @@ public class WeekMenuResponseDto {
     private String name;
 
     private List<IngredientResponseDto> ingredients;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<IngredientResponseDto> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<IngredientResponseDto> ingredients) {
-        this.ingredients = ingredients;
-    }
 }

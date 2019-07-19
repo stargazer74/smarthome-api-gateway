@@ -26,7 +26,11 @@ package de.smarthome.assistant.apigateway.web.dto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class WeekMenuListDto {
 
     @NotNull

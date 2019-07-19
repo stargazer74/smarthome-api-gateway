@@ -24,16 +24,12 @@
 package de.smarthome.assistant.apigateway.service.external.WeekMenu.dto;
 
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class WeekMenuListResponseDto {
 
     public List<WeekMenuResponseDto> weekMenuResponseDtos;
-
-    public List<WeekMenuResponseDto> getWeekMenuResponseDtos() {
-        return weekMenuResponseDtos;
-    }
-
-    public void setWeekMenuResponseDtos(List<WeekMenuResponseDto> weekMenuResponseDtos) {
-        this.weekMenuResponseDtos = weekMenuResponseDtos;
-    }
 }
