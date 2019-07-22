@@ -37,6 +37,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 @PropertySource({ "classpath:conf/weekmenu.properties" })
@@ -53,13 +56,12 @@ public class WeekMenusService {
     public CompletableFuture<Optional<WeekMenuListResponseDto>> getWeekMenuList(){
         try{
             log.info("Looking up weekmenu service");
-//            final UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("http").host(serviceUrl).path("keineAhnung").port(servicePort)
-//                    .build();
-//            final RestTemplate restTemplate = new RestTemplate();
-//            final String uriString = uriComponents.toUriString();
-//            final WeekMenuListResponseDto weekMenuListResponseDto = restTemplate.getForObject(uriString, WeekMenuListResponseDto.class);
-            final WeekMenuListResponseDto weekMenuListResponseDto1 = mockData();
-            return CompletableFuture.completedFuture(Optional.of(weekMenuListResponseDto1));
+            final UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("http").host(serviceUrl).path("/list").port(servicePort)
+                    .build();
+            final RestTemplate restTemplate = new RestTemplate();
+            final String uriString = uriComponents.toUriString();
+            final WeekMenuListResponseDto weekMenuListResponseDto = restTemplate.getForObject(uriString, WeekMenuListResponseDto.class);
+            return CompletableFuture.completedFuture(Optional.ofNullable(weekMenuListResponseDto));
         } catch (RestClientException e) {
             log.info(e.getMessage());
             return CompletableFuture.completedFuture(Optional.empty());

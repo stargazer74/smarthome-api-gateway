@@ -41,6 +41,4 @@ public class IngredientResponseDto {
     private String amount;
 
     private String unitOfMeasure;
-
-    private String unitOfMeasureString;
 }

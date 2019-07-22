@@ -38,5 +38,9 @@ public class IngredientDto {
     @NotEmpty
     private String name;
 
+    @NotEmpty
     private String amount;
+
+    @NotEmpty
+    private String unitOfMeasure;
 }
