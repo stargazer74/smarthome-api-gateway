@@ -35,7 +35,7 @@
 	<artifactId>apigateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>apigateway</name>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<description>API gateway for smarthome assistant project</description>
 
 	<properties>

@@ -1,12 +1,10 @@
-FROM tomcat:9-jre11
+FROM openjdk:11-jdk
 
-LABEL author="Chris Wohlbrecht"
-
-ADD target/apigateway.war /usr/local/tomcat/webapps/apigateway.war
+LABEL autor="Chris Wohlbrecht"
 
 ENV TZ=Europe/Berlin
 
-EXPOSE 8080
-EXPOSE 8009
+ARG JAR_FILE=target/apigateway.jar
+ADD ${JAR_FILE} apigateway.jar
 
-CMD ["catalina.sh", "jpda", "run"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/apigateway.jar"]

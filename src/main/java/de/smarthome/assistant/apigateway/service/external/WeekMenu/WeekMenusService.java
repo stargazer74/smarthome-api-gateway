@@ -24,6 +24,7 @@
 package de.smarthome.assistant.apigateway.service.external.WeekMenu;
 
 import de.smarthome.assistant.apigateway.configuration.AsyncConfig;
+import de.smarthome.assistant.apigateway.model.UnitOfMeasures;
 import de.smarthome.assistant.apigateway.service.external.WeekMenu.dto.IngredientResponseDto;
 import de.smarthome.assistant.apigateway.service.external.WeekMenu.dto.WeekMenuListResponseDto;
 import de.smarthome.assistant.apigateway.service.external.WeekMenu.dto.WeekMenuResponseDto;
@@ -77,14 +78,12 @@ public class WeekMenusService {
         ingredientResponse_1.setId(1L);
         ingredientResponse_1.setName("Kartoffeln");
         ingredientResponse_1.setAmount("200");
-        ingredientResponse_1.setUnitOfMeasure("kg");
-        ingredientResponse_1.setUnitOfMeasureString("Kilogramm");
+        ingredientResponse_1.setUnitOfMeasure(UnitOfMeasures.KILOGRAMM);
         final IngredientResponseDto ingredientResponse_2 = new IngredientResponseDto();
         ingredientResponse_2.setId(2L);
         ingredientResponse_2.setName("Rinderfleisch");
         ingredientResponse_2.setAmount("500");
-        ingredientResponse_2.setUnitOfMeasure("g");
-        ingredientResponse_2.setUnitOfMeasureString("Gramm");
+        ingredientResponse_2.setUnitOfMeasure(UnitOfMeasures.GRAMM);
         List<IngredientResponseDto> ingredients_1 = new ArrayList<>();
         ingredients_1.add(ingredientResponse_1);
         ingredients_1.add(ingredientResponse_2);
@@ -97,14 +96,12 @@ public class WeekMenusService {
         ingredientResponse_3.setId(3L);
         ingredientResponse_3.setName("Grieß");
         ingredientResponse_3.setAmount("200");
-        ingredientResponse_3.setUnitOfMeasure("l");
-        ingredientResponse_3.setUnitOfMeasureString("Liter");
+        ingredientResponse_3.setUnitOfMeasure(UnitOfMeasures.LITER);
         final IngredientResponseDto ingredientResponse_4 = new IngredientResponseDto();
         ingredientResponse_4.setId(4L);
         ingredientResponse_4.setName("Zucker");
         ingredientResponse_4.setAmount("2");
-        ingredientResponse_4.setUnitOfMeasure("l");
-        ingredientResponse_4.setUnitOfMeasureString("Liter");
+        ingredientResponse_4.setUnitOfMeasure(UnitOfMeasures.LITER);
         List<IngredientResponseDto> ingredients_2 = new ArrayList<>();
         ingredients_2.add(ingredientResponse_3);
         ingredients_2.add(ingredientResponse_4);

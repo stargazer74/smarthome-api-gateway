@@ -21,25 +21,13 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.apigateway.service.external.WeekMenu.dto;
+package de.smarthome.assistant.apigateway.model;
 
-import de.smarthome.assistant.apigateway.model.UnitOfMeasures;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-public class IngredientResponseDto {
-
-    @NotNull
-    private Long id;
-
-    @NotEmpty
-    private String name;
-
-    private String amount;
-
-    private UnitOfMeasures unitOfMeasure;
+public enum UnitOfMeasures {
+    ESSLOEFFEL,
+    GRAMM,
+    KILOGRAMM,
+    LITER,
+    MILLILITER,
+    TEELOEFFEL
 }
