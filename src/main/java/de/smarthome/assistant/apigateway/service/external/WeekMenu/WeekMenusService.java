@@ -43,7 +43,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
-@PropertySource({ "classpath:conf/weekmenu.properties" })
+@PropertySource({"classpath:conf/weekmenu.properties"})
 @Slf4j
 public class WeekMenusService {
 
@@ -54,8 +54,8 @@ public class WeekMenusService {
     private String servicePort;
 
     @Async(AsyncConfig.TASK_EXECUTOR_SERVICE)
-    public CompletableFuture<Optional<WeekMenuListResponseDto>> getWeekMenuList(){
-        try{
+    public CompletableFuture<Optional<WeekMenuListResponseDto>> getWeekMenuList() {
+        try {
             log.info("Looking up weekmenu service");
             final UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("http").host(serviceUrl).path("/list").port(servicePort)
                     .build();
@@ -69,7 +69,7 @@ public class WeekMenusService {
         }
     }
 
-    private WeekMenuListResponseDto mockData(){
+    private WeekMenuListResponseDto mockData() {
         // create demo data
         final WeekMenuResponseDto weekMenuResponseDto_1 = new WeekMenuResponseDto();
         weekMenuResponseDto_1.setId(1L);
@@ -83,7 +83,7 @@ public class WeekMenusService {
         ingredientResponse_2.setId(2L);
         ingredientResponse_2.setName("Rinderfleisch");
         ingredientResponse_2.setAmount("500");
-        ingredientResponse_2.setUnitOfMeasure(UnitOfMeasures.GRAMM);
+        ingredientResponse_2.setUnitOfMeasure(UnitOfMeasures.LITER);
         List<IngredientResponseDto> ingredients_1 = new ArrayList<>();
         ingredients_1.add(ingredientResponse_1);
         ingredients_1.add(ingredientResponse_2);
@@ -101,7 +101,7 @@ public class WeekMenusService {
         ingredientResponse_4.setId(4L);
         ingredientResponse_4.setName("Zucker");
         ingredientResponse_4.setAmount("2");
-        ingredientResponse_4.setUnitOfMeasure(UnitOfMeasures.LITER);
+        ingredientResponse_4.setUnitOfMeasure(UnitOfMeasures.KILOGRAMM);
         List<IngredientResponseDto> ingredients_2 = new ArrayList<>();
         ingredients_2.add(ingredientResponse_3);
         ingredients_2.add(ingredientResponse_4);
