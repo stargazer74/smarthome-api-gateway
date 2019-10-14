@@ -24,12 +24,7 @@
 package de.smarthome.assistant.apigateway.service.external.WeekMenu;
 
 import de.smarthome.assistant.apigateway.configuration.AsyncConfig;
-import de.smarthome.assistant.apigateway.model.UnitOfMeasures;
-import de.smarthome.assistant.apigateway.service.external.WeekMenu.dto.IngredientResponseDto;
 import de.smarthome.assistant.apigateway.service.external.WeekMenu.dto.WeekMenuListResponseDto;
-import de.smarthome.assistant.apigateway.service.external.WeekMenu.dto.WeekMenuResponseDto;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import lombok.extern.slf4j.Slf4j;

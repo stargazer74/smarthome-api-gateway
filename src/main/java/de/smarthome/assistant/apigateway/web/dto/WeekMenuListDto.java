@@ -35,12 +35,4 @@ public class WeekMenuListDto {
 
     @NotNull
     private List<WeekMenuDto> weekMenuDtos = new ArrayList<>();
-
-    public List<WeekMenuDto> getWeekMenuDtos() {
-        return weekMenuDtos;
-    }
-
-    public void setWeekMenuDtos(List<WeekMenuDto> weekMenuDtos) {
-        this.weekMenuDtos = weekMenuDtos;
-    }
 }

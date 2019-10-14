@@ -34,6 +34,6 @@ public interface WeekMenuDtoMapper {
 
     WeekMenuDtoMapper INSTANCE = Mappers.getMapper(WeekMenuDtoMapper.class);
 
-    @Mapping(source = "weekMenuResponseDtos", target = "weekMenuDtos")
+    @Mapping(source = "weekMenuResponseDtos", target = "weekMenuDtos", qualifiedByName = "")
     WeekMenuListDto weekMenuListResponseDto2WeekMenuListDto(WeekMenuListResponseDto weekMenuListResponseDto);
 }

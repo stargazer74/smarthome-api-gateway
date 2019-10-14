@@ -21,26 +21,20 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.apigateway.web.dto;
+package de.smarthome.assistant.apigateway.component.weekmenu;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import static org.junit.Assert.*;
 
-@Getter
-@Setter
-public class IngredientDto {
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-    @NotNull
-    private Long id;
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class WeekMenuIImplTest {
 
-    @NotEmpty
-    private String name;
-
-    @NotEmpty
-    private Float amount;
-
-    @NotEmpty
-    private String unitOfMeasure;
+    @Test
+    public void getWeekMenuListSuccessTest() {
+    }
 }

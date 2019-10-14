@@ -23,7 +23,7 @@
 
 package de.smarthome.assistant.apigateway.service.external.WeekMenu.dto;
 
-import de.smarthome.assistant.apigateway.model.UnitOfMeasures;
+import de.smarthome.assistant.apigateway.model.type.UnitOfMeasures;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
@@ -39,7 +39,7 @@ public class IngredientResponseDto {
     @NotEmpty
     private String name;
 
-    private String amount;
+    private Float amount;
 
     private UnitOfMeasures unitOfMeasure;
 }

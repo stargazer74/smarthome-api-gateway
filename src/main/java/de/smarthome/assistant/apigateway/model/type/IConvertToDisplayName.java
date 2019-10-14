@@ -21,26 +21,8 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.apigateway.web.dto;
+package de.smarthome.assistant.apigateway.model.type;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-public class IngredientDto {
-
-    @NotNull
-    private Long id;
-
-    @NotEmpty
-    private String name;
-
-    @NotEmpty
-    private Float amount;
-
-    @NotEmpty
-    private String unitOfMeasure;
+public interface IConvertToDisplayName {
+    public String getDisplayString();
 }

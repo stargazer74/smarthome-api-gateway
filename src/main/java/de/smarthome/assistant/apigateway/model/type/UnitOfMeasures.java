@@ -21,26 +21,28 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.apigateway.web.dto;
+package de.smarthome.assistant.apigateway.model.type;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import java.util.stream.Stream;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
-public class IngredientDto {
+public enum UnitOfMeasures implements IConvertToDisplayName{
 
-    @NotNull
-    private Long id;
+    ESSLOEFFEL("EL"),
+    GRAMM("g"),
+    KILOGRAMM("kg"),
+    LITER("l"),
+    MILLILITER("ml"),
+    TEELOEFFEL("TL");
 
-    @NotEmpty
-    private String name;
+    private String displayString;
 
-    @NotEmpty
-    private Float amount;
+    UnitOfMeasures(String displayString){
+        this.displayString = displayString;
+    }
 
-    @NotEmpty
-    private String unitOfMeasure;
+    public static Stream<UnitOfMeasures> stream() {
+        return Stream.of(UnitOfMeasures.values());
+    }
 }

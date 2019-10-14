@@ -21,13 +21,27 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.apigateway.model;
+package de.smarthome.assistant.apigateway.component.weekmenu.mapper;
 
-public enum UnitOfMeasures {
-    ESSLOEFFEL,
-    GRAMM,
-    KILOGRAMM,
-    LITER,
-    MILLILITER,
-    TEELOEFFEL
+import de.smarthome.assistant.apigateway.model.type.UnitOfMeasures;
+import de.smarthome.assistant.apigateway.service.external.WeekMenu.dto.IngredientResponseDto;
+import de.smarthome.assistant.apigateway.web.dto.IngredientDto;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.Named;
+import org.mapstruct.factory.Mappers;
+
+@Mapper(componentModel = "spring")
+public interface IngredientMapper {
+
+    IngredientMapper INSTANCE = Mappers.getMapper(IngredientMapper.class);
+
+    @Mappings(@Mapping(source = "unitOfMeasure", target = "unitOfMeasure", qualifiedByName = "unitOfMeasureMap"))
+    IngredientDto ingredientResponseDto2IngredientDto(IngredientResponseDto ingredientResponseDto);
+
+    @Named("unitOfMeasureMap")
+    default String unitOfMeasureMap(UnitOfMeasures unitOfMeasures){
+        return unitOfMeasures.getDisplayString();
+    }
 }
