@@ -43,6 +43,8 @@ public interface WeekMenuDtoMapper {
     @Mapping(source = "weekMenuResponseDtos", target = "weekMenuDtos", qualifiedByName = "weekMenuMap")
     WeekMenuListDto weekMenuListResponseDto2WeekMenuListDto(WeekMenuListResponseDto weekMenuListResponseDto);
 
+    WeekMenuDto weekMenuResponseDto2WeekMenuDto(WeekMenuResponseDto weekMenuResponseDto);
+
     @Named("weekMenuMap")
     default List<WeekMenuDto> weekMenuMap(List<WeekMenuResponseDto> weekMenuResponseDtos) {
         return weekMenuResponseDtos.stream().map(a -> {

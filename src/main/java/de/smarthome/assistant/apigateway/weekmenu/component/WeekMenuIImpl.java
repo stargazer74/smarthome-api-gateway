@@ -25,7 +25,9 @@ package de.smarthome.assistant.apigateway.weekmenu.component;
 
 import de.smarthome.assistant.apigateway.configuration.AsyncConfig;
 import de.smarthome.assistant.apigateway.weekmenu.component.mapper.WeekMenuDtoMapper;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuListDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuRequestDto;
 import de.smarthome.assistant.apigateway.weekmenu.service.external.WeekMenusService;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -46,5 +48,11 @@ public class WeekMenuIImpl implements WeekMenuI {
     public CompletableFuture<Optional<WeekMenuListDto>> getWeekMenuList() {
         return weekMenusService.getWeekMenuList()
                 .thenApply(a -> a.map(WeekMenuDtoMapper.INSTANCE::weekMenuListResponseDto2WeekMenuListDto));
+    }
+
+    @Override
+    public CompletableFuture<Optional<WeekMenuDto>> insert(WeekMenuRequestDto weekMenuRequestDto) {
+        return this.weekMenusService.insert(weekMenuRequestDto)
+                .thenApply(a -> a.map(WeekMenuDtoMapper.INSTANCE::weekMenuResponseDto2WeekMenuDto));
     }
 }

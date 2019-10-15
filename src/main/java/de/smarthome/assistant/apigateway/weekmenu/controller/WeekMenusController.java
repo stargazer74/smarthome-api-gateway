@@ -26,10 +26,14 @@ package de.smarthome.assistant.apigateway.weekmenu.controller;
 import de.smarthome.assistant.apigateway.weekmenu.component.WeekMenuI;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuListDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuRequestDto;
+import java.net.URI;
 import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +52,7 @@ public class WeekMenusController {
     /**
      * Returns a list of all available menus.
      *
-     * @return ListWeekMenusDto
+     * @return {@link WeekMenuListDto}
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ResponseEntity<WeekMenuListDto> list() throws ExecutionException, InterruptedException {
@@ -60,7 +64,7 @@ public class WeekMenusController {
      * Returns a single menu found by id.
      *
      * @param id of the menu
-     * @return WeekMenuDto
+     * @return {@link WeekMenuDto}
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public WeekMenuDto get(@PathVariable("id") Long id) {
@@ -71,11 +75,23 @@ public class WeekMenusController {
      * Returns a list of all menus filtered by a search string.
      *
      * @param searchString a search string
-     * @return ListWeekMenusDto
+     * @return {@link WeekMenuListDto}
      */
     @RequestMapping(value = "/list/{searchstring}", method = RequestMethod.GET)
     public WeekMenuListDto filteredList(@PathVariable("searchstring") String searchString) {
         return null;
+    }
+
+    /**
+     * Insert new given {@link WeekMenuDto} into the database
+     *
+     * @param menuDto {@link WeekMenuDto}
+     * @return {@link WeekMenuDto}
+     */
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<WeekMenuDto> insert(@RequestBody WeekMenuRequestDto weekMenuRequestDto) throws ExecutionException, InterruptedException {
+        return this.weekMenu.insert(weekMenuRequestDto).get().map(a -> ResponseEntity.created(URI.create("/" + a.getId())).body(a))
+                .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
 }
