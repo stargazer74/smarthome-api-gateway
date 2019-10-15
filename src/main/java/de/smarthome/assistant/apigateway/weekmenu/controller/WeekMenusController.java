@@ -24,9 +24,12 @@
 package de.smarthome.assistant.apigateway.weekmenu.controller;
 
 import de.smarthome.assistant.apigateway.weekmenu.component.WeekMenuI;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.DropDownValueListDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuListDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuRequestDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.util.Enum2DropDownConverter;
+import de.smarthome.assistant.apigateway.weekmenu.model.type.UnitOfMeasures;
 import java.net.URI;
 import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,13 +88,18 @@ public class WeekMenusController {
     /**
      * Insert new given {@link WeekMenuDto} into the database
      *
-     * @param menuDto {@link WeekMenuDto}
+     * @param weekMenuRequestDto {@link WeekMenuDto}
      * @return {@link WeekMenuDto}
      */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<WeekMenuDto> insert(@RequestBody WeekMenuRequestDto weekMenuRequestDto) throws ExecutionException, InterruptedException {
         return this.weekMenu.insert(weekMenuRequestDto).get().map(a -> ResponseEntity.created(URI.create("/" + a.getId())).body(a))
                 .orElseGet(() -> ResponseEntity.badRequest().build());
+    }
+
+    @RequestMapping(value = "/units-of-measure", method = RequestMethod.GET)
+    public DropDownValueListDto getUnitsOfMeasure() {
+        return Enum2DropDownConverter.toDropDownList(UnitOfMeasures.values());
     }
 
 }
