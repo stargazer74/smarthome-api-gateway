@@ -50,6 +50,11 @@ public class WeekMenusService {
     @Value("${weekmenu.service.external.port}")
     private String servicePort;
 
+    /**
+     * calling the week menu service and try to get all week menus
+     *
+     * @return {@link WeekMenuListResponseDto}
+     */
     @Async(AsyncConfig.TASK_EXECUTOR_SERVICE)
     public CompletableFuture<Optional<WeekMenuListResponseDto>> getWeekMenuList() {
         try {
@@ -66,6 +71,12 @@ public class WeekMenusService {
         }
     }
 
+    /**
+     *  Calling the week menu service and try to insert a new week menu into the database.
+     *
+     * @param weekMenuRequestDto {@link WeekMenuRequestDto}
+     * @return {@link WeekMenuResponseDto}
+     */
     @Async(AsyncConfig.TASK_EXECUTOR_SERVICE)
     public CompletableFuture<Optional<WeekMenuResponseDto>> insert(WeekMenuRequestDto weekMenuRequestDto) {
         try {
