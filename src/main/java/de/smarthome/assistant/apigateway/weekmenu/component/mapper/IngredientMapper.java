@@ -42,6 +42,6 @@ public interface IngredientMapper {
 
     @Named("unitOfMeasureMap")
     default String unitOfMeasureMap(UnitOfMeasures unitOfMeasures){
-        return unitOfMeasures.getDisplayString();
+        return unitOfMeasures.name();
     }
 }

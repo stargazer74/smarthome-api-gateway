@@ -94,6 +94,6 @@ public class WeekMenuIImplTest {
         assertEquals(1, weekMenuListDto.get().getWeekMenuDtos().size());
         assertEquals("Kartoffelsuppe", weekMenuListDto.get().getWeekMenuDtos().get(0).getName());
         assertEquals(2, weekMenuListDto.get().getWeekMenuDtos().get(0).getIngredients().size());
-        assertEquals("g", weekMenuListDto.get().getWeekMenuDtos().get(0).getIngredients().get(0).getUnitOfMeasure());
+        assertEquals("GRAMM", weekMenuListDto.get().getWeekMenuDtos().get(0).getIngredients().get(0).getUnitOfMeasure());
     }
 }
