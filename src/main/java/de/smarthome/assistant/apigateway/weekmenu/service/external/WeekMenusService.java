@@ -60,7 +60,7 @@ public class WeekMenusService {
         try {
             log.info("Looking up weekmenu service for list of week menus");
             final UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("http").host(serviceUrl)
-                    .path("/menu-service/list").port(servicePort).build();
+                    .path("/menu/list").port(servicePort).build();
             final RestTemplate restTemplate = new RestTemplate();
             final String uriString = uriComponents.toUriString();
             final WeekMenuListResponseDto weekMenuListResponseDto = restTemplate.getForObject(uriString, WeekMenuListResponseDto.class);

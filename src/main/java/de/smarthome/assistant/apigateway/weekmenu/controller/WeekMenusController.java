@@ -35,7 +35,6 @@ import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -97,6 +96,11 @@ public class WeekMenusController {
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
+    /**
+     * returns all possible values of {@link UnitOfMeasures}
+     *
+     * @return {@link DropDownValueListDto}
+     */
     @RequestMapping(value = "/units-of-measure", method = RequestMethod.GET)
     public DropDownValueListDto getUnitsOfMeasure() {
         return Enum2DropDownConverter.toDropDownList(UnitOfMeasures.values());

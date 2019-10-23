@@ -33,6 +33,8 @@ import lombok.Setter;
 @Setter
 public class WeekMenuRequestDto {
 
+    private Long id;
+
     @NotEmpty
     private String name;
 

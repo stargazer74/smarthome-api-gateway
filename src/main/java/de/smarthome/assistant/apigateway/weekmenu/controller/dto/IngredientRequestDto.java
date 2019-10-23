@@ -33,6 +33,8 @@ import lombok.Setter;
 @Setter
 public class IngredientRequestDto {
 
+    private Long id;
+
     @NotEmpty
     private String name;
 
