@@ -81,7 +81,7 @@ public class WeekMenusService {
     public CompletableFuture<Optional<WeekMenuResponseDto>> insert(WeekMenuRequestDto weekMenuRequestDto) {
         try {
             log.info("Looking up weekmenu service to insert a week menu");
-            final UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("http").host(serviceUrl).path("/menu-service")
+            final UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("http").host(serviceUrl).path("/menu")
                     .port(servicePort).build();
             final RestTemplate restTemplate = new RestTemplate();
             final String uriString = uriComponents.toUriString();
