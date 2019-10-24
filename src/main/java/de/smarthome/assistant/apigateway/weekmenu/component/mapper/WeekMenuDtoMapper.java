@@ -40,13 +40,13 @@ public interface WeekMenuDtoMapper {
 
     WeekMenuDtoMapper INSTANCE = Mappers.getMapper(WeekMenuDtoMapper.class);
 
-    @Mapping(source = "weekMenuResponseDtos", target = "weekMenuDtos", qualifiedByName = "weekMenuMap")
+    @Mapping(source = "weekMenuResponseDtos", target = "weekMenuDtos", qualifiedByName = "weekMenuListMap")
     WeekMenuListDto weekMenuListResponseDto2WeekMenuListDto(WeekMenuListResponseDto weekMenuListResponseDto);
 
     WeekMenuDto weekMenuResponseDto2WeekMenuDto(WeekMenuResponseDto weekMenuResponseDto);
 
-    @Named("weekMenuMap")
-    default List<WeekMenuDto> weekMenuMap(List<WeekMenuResponseDto> weekMenuResponseDtos) {
+    @Named("weekMenuListMap")
+    default List<WeekMenuDto> weekMenuListMap(List<WeekMenuResponseDto> weekMenuResponseDtos) {
         return weekMenuResponseDtos.stream().map(a -> {
             final WeekMenuDto weekMenuDto = new WeekMenuDto();
             weekMenuDto.setId(a.getId());
