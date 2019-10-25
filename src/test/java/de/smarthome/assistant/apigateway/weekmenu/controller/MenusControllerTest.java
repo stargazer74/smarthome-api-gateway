@@ -26,15 +26,14 @@ package de.smarthome.assistant.apigateway.weekmenu.controller;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import de.smarthome.assistant.apigateway.weekmenu.component.WeekMenuI;
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuDto;
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuListDto;
-import de.smarthome.assistant.apigateway.weekmenu.persistence.WeekMenuDtoBuilder;
+import de.smarthome.assistant.apigateway.weekmenu.component.MenuI;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuListDto;
+import de.smarthome.assistant.apigateway.weekmenu.persistence.MenuDtoBuilder;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -49,29 +48,29 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
-public class WeekMenusControllerTest {
+public class MenusControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private WeekMenuI weekMenu;
+    private MenuI weekMenu;
 
     @Test
     public void listSuccessTest() throws Exception {
         /*
          * prepare
          */
-        final WeekMenuListDto weekMenuListDto = new WeekMenuListDto();
-        final WeekMenuDto weekMenuDto = new WeekMenuDtoBuilder.Builder().withIngredients().build();
-        weekMenuListDto.setWeekMenuDtos(List.of(weekMenuDto));
-        given(weekMenu.getWeekMenuList()).willReturn(CompletableFuture.completedFuture(Optional.of(weekMenuListDto)));
+        final MenuListDto weekMenuListDto = new MenuListDto();
+        final MenuDto menuDto = new MenuDtoBuilder.Builder().asPotatoeSoup().build();
+        weekMenuListDto.setMenuDtos(List.of(menuDto));
+        given(weekMenu.getMenuList()).willReturn(CompletableFuture.completedFuture(Optional.of(weekMenuListDto)));
 
         /*
          * test
          */
         mockMvc.perform(get("/weekMenus/list").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(
-                jsonPath("$.weekMenuDtos[0].ingredients[0].unitOfMeasure", is(weekMenuDto.getIngredients().get(0).getUnitOfMeasure())));
+                jsonPath("$.menuDtos[0].ingredients[0].unitOfMeasure", is(menuDto.getIngredients().get(0).getUnitOfMeasure().name())));
     }
 
     @Test

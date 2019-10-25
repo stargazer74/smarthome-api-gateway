@@ -24,9 +24,9 @@
 package de.smarthome.assistant.apigateway.weekmenu.service.external;
 
 import de.smarthome.assistant.apigateway.configuration.AsyncConfig;
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuRequestDto;
-import de.smarthome.assistant.apigateway.weekmenu.service.external.dto.WeekMenuListResponseDto;
-import de.smarthome.assistant.apigateway.weekmenu.service.external.dto.WeekMenuResponseDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuRequestDto;
+import de.smarthome.assistant.apigateway.weekmenu.service.external.dto.MenuListResponseDto;
+import de.smarthome.assistant.apigateway.weekmenu.service.external.dto.MenuResponseDto;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Service
 @PropertySource({ "classpath:conf/weekmenu.properties" })
 @Slf4j
-public class WeekMenusService {
+public class MenusService {
 
     @Value("${weekmenu.service.external.url}")
     private String serviceUrl;
@@ -53,17 +53,17 @@ public class WeekMenusService {
     /**
      * calling the week menu service and try to get all week menus
      *
-     * @return {@link WeekMenuListResponseDto}
+     * @return {@link MenuListResponseDto}
      */
     @Async(AsyncConfig.TASK_EXECUTOR_SERVICE)
-    public CompletableFuture<Optional<WeekMenuListResponseDto>> getWeekMenuList() {
+    public CompletableFuture<Optional<MenuListResponseDto>> getWeekMenuList() {
         try {
             log.info("Looking up weekmenu service for list of week menus");
             final UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("http").host(serviceUrl)
                     .path("/menu/list").port(servicePort).build();
             final RestTemplate restTemplate = new RestTemplate();
             final String uriString = uriComponents.toUriString();
-            final WeekMenuListResponseDto weekMenuListResponseDto = restTemplate.getForObject(uriString, WeekMenuListResponseDto.class);
+            final MenuListResponseDto weekMenuListResponseDto = restTemplate.getForObject(uriString, MenuListResponseDto.class);
             return CompletableFuture.completedFuture(Optional.ofNullable(weekMenuListResponseDto));
         } catch (RestClientException e) {
             log.info("Can't connect to weekmenu service due the following error: " + e.getMessage());
@@ -74,19 +74,19 @@ public class WeekMenusService {
     /**
      *  Calling the week menu service and try to insert a new week menu into the database.
      *
-     * @param weekMenuRequestDto {@link WeekMenuRequestDto}
-     * @return {@link WeekMenuResponseDto}
+     * @param weekMenuRequestDto {@link MenuRequestDto}
+     * @return {@link MenuResponseDto}
      */
     @Async(AsyncConfig.TASK_EXECUTOR_SERVICE)
-    public CompletableFuture<Optional<WeekMenuResponseDto>> insert(WeekMenuRequestDto weekMenuRequestDto) {
+    public CompletableFuture<Optional<MenuResponseDto>> insert(MenuRequestDto weekMenuRequestDto) {
         try {
             log.info("Looking up weekmenu service to insert a week menu");
             final UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("http").host(serviceUrl).path("/menu")
                     .port(servicePort).build();
             final RestTemplate restTemplate = new RestTemplate();
             final String uriString = uriComponents.toUriString();
-            final WeekMenuResponseDto weekMenuResponseDto = restTemplate
-                    .postForObject(uriString, weekMenuRequestDto, WeekMenuResponseDto.class);
+            final MenuResponseDto weekMenuResponseDto = restTemplate
+                    .postForObject(uriString, weekMenuRequestDto, MenuResponseDto.class);
             return CompletableFuture.completedFuture(Optional.ofNullable(weekMenuResponseDto));
         } catch (RestClientException e) {
             log.info("Can't connect to weekmenu service due the following error: " + e.getMessage());

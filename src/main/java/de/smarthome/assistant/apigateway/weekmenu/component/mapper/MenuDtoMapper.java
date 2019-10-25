@@ -23,12 +23,11 @@
 
 package de.smarthome.assistant.apigateway.weekmenu.component.mapper;
 
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuDto;
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuListDto;
-import de.smarthome.assistant.apigateway.weekmenu.service.external.dto.WeekMenuListResponseDto;
-import de.smarthome.assistant.apigateway.weekmenu.service.external.dto.WeekMenuResponseDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuListDto;
+import de.smarthome.assistant.apigateway.weekmenu.service.external.dto.MenuResponseDto;
+import de.smarthome.assistant.apigateway.weekmenu.service.external.dto.MenuListResponseDto;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -36,24 +35,26 @@ import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface WeekMenuDtoMapper {
+public interface MenuDtoMapper {
 
-    WeekMenuDtoMapper INSTANCE = Mappers.getMapper(WeekMenuDtoMapper.class);
+    MenuDtoMapper INSTANCE = Mappers.getMapper(MenuDtoMapper.class);
 
-    @Mapping(source = "weekMenuResponseDtos", target = "weekMenuDtos", qualifiedByName = "weekMenuListMap")
-    WeekMenuListDto weekMenuListResponseDto2WeekMenuListDto(WeekMenuListResponseDto weekMenuListResponseDto);
+    @Mapping(source = "menuResponseDtos", target = "menuDtos", qualifiedByName = "menuListMap")
+    MenuListDto menuListResponseDto2MenuListDto(MenuListResponseDto weekMenuListResponseDto);
 
-    WeekMenuDto weekMenuResponseDto2WeekMenuDto(WeekMenuResponseDto weekMenuResponseDto);
+    MenuDto menuResponseDto2MenuDto(MenuResponseDto weekMenuResponseDto);
+
+    MenuResponseDto menuDto2MenuResponseDto(MenuDto menuDto);
 
     @Named("weekMenuListMap")
-    default List<WeekMenuDto> weekMenuListMap(List<WeekMenuResponseDto> weekMenuResponseDtos) {
-        return weekMenuResponseDtos.stream().map(a -> {
-            final WeekMenuDto weekMenuDto = new WeekMenuDto();
-            weekMenuDto.setId(a.getId());
-            weekMenuDto.setName(a.getName());
-            weekMenuDto.setIngredients(a.getIngredients().stream().map(IngredientMapper.INSTANCE::ingredientResponseDto2IngredientDto)
+    default List<MenuDto> menuListMap(List<MenuResponseDto> menuResponseDtos) {
+        return menuResponseDtos.stream().map(a -> {
+            final MenuDto menuDto = new MenuDto();
+            menuDto.setId(a.getId());
+            menuDto.setName(a.getName());
+            menuDto.setIngredients(a.getIngredients().stream().map(IngredientMapper.INSTANCE::ingredientResponseDto2IngredientDto)
                     .collect(Collectors.toList()));
-            return weekMenuDto;
+            return menuDto;
         }).collect(Collectors.toList());
     }
 }

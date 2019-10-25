@@ -23,11 +23,11 @@
 
 package de.smarthome.assistant.apigateway.weekmenu.controller;
 
-import de.smarthome.assistant.apigateway.weekmenu.component.WeekMenuI;
+import de.smarthome.assistant.apigateway.weekmenu.component.MenuI;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.DropDownValueListDto;
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuDto;
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuListDto;
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuRequestDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuListDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuRequestDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.util.Enum2DropDownConverter;
 import de.smarthome.assistant.apigateway.weekmenu.model.type.UnitOfMeasures;
 import java.net.URI;
@@ -42,23 +42,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/weekMenus")
-public class WeekMenusController {
+public class MenusController {
 
-    private final WeekMenuI weekMenu;
+    private final MenuI weekMenu;
 
     @Autowired
-    public WeekMenusController(WeekMenuI weekMenu) {
+    public MenusController(MenuI weekMenu) {
         this.weekMenu = weekMenu;
     }
 
     /**
      * Returns a list of all available menus.
      *
-     * @return {@link WeekMenuListDto}
+     * @return {@link MenuListDto}
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<WeekMenuListDto> list() throws ExecutionException, InterruptedException {
-        return this.weekMenu.getWeekMenuList().get().map(weekMenu -> ResponseEntity.ok().body(weekMenu))
+    public ResponseEntity<MenuListDto> list() throws ExecutionException, InterruptedException {
+        return this.weekMenu.getMenuList().get().map(weekMenu -> ResponseEntity.ok().body(weekMenu))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -66,10 +66,10 @@ public class WeekMenusController {
      * Returns a single menu found by id.
      *
      * @param id of the menu
-     * @return {@link WeekMenuDto}
+     * @return {@link MenuDto}
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public WeekMenuDto get(@PathVariable("id") Long id) {
+    public MenuDto get(@PathVariable("id") Long id) {
         return null;
     }
 
@@ -77,21 +77,21 @@ public class WeekMenusController {
      * Returns a list of all menus filtered by a search string.
      *
      * @param searchString a search string
-     * @return {@link WeekMenuListDto}
+     * @return {@link MenuListDto}
      */
     @RequestMapping(value = "/list/{searchstring}", method = RequestMethod.GET)
-    public WeekMenuListDto filteredList(@PathVariable("searchstring") String searchString) {
+    public MenuListDto filteredList(@PathVariable("searchstring") String searchString) {
         return null;
     }
 
     /**
-     * Insert new given {@link WeekMenuDto} into the database
+     * Insert new given {@link MenuDto} into the database
      *
-     * @param weekMenuRequestDto {@link WeekMenuDto}
-     * @return {@link WeekMenuDto}
+     * @param weekMenuRequestDto {@link MenuDto}
+     * @return {@link MenuDto}
      */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<WeekMenuDto> insert(@RequestBody WeekMenuRequestDto weekMenuRequestDto) throws ExecutionException, InterruptedException {
+    public ResponseEntity<MenuDto> insert(@RequestBody MenuRequestDto weekMenuRequestDto) throws ExecutionException, InterruptedException {
         return this.weekMenu.insert(weekMenuRequestDto).get().map(a -> ResponseEntity.created(URI.create("/" + a.getId())).body(a))
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }

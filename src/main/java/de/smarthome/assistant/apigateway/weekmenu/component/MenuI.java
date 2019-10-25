@@ -21,17 +21,18 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.apigateway.weekmenu.service.external.dto;
+package de.smarthome.assistant.apigateway.weekmenu.component;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
-import lombok.Getter;
-import lombok.Setter;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuListDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuRequestDto;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
-@Getter
-@Setter
-public class WeekMenuListResponseDto {
+public interface MenuI {
 
-    @JsonProperty(value = "weekMenuDtos")
-    private List<WeekMenuResponseDto> weekMenuResponseDtos;
+    CompletableFuture<Optional<MenuListDto>> getMenuList();
+
+    CompletableFuture<Optional<MenuDto>> insert(MenuRequestDto menuDto);
+
 }

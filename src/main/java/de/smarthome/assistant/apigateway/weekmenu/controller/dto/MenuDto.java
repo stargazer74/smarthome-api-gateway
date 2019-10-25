@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.apigateway.weekmenu.service.external.dto;
+package de.smarthome.assistant.apigateway.weekmenu.controller.dto;
 
 import java.util.List;
 import javax.validation.constraints.NotEmpty;
@@ -31,7 +31,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class WeekMenuResponseDto {
+public class MenuDto {
 
     @NotNull
     private Long id;
@@ -39,5 +39,6 @@ public class WeekMenuResponseDto {
     @NotEmpty
     private String name;
 
-    private List<IngredientResponseDto> ingredients;
+    @NotNull
+    private List<IngredientDto> ingredients;
 }

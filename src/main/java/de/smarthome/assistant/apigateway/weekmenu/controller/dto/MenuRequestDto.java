@@ -21,18 +21,23 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.apigateway.weekmenu.component;
+package de.smarthome.assistant.apigateway.weekmenu.controller.dto;
 
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuDto;
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuListDto;
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuRequestDto;
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
+import java.util.List;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
-public interface WeekMenuI {
+@Getter
+@Setter
+public class MenuRequestDto {
 
-    CompletableFuture<Optional<WeekMenuListDto>> getWeekMenuList();
+    private Long id;
 
-    CompletableFuture<Optional<WeekMenuDto>> insert(WeekMenuRequestDto menuDto);
+    @NotEmpty
+    private String name;
 
+    @NotNull
+    private List<IngredientRequestDto> ingredients;
 }

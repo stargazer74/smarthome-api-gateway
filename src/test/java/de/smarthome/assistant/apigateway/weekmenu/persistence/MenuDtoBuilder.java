@@ -24,42 +24,65 @@
 package de.smarthome.assistant.apigateway.weekmenu.persistence;
 
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.IngredientDto;
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.WeekMenuDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuDto;
 import de.smarthome.assistant.apigateway.weekmenu.model.type.UnitOfMeasures;
-import de.smarthome.assistant.apigateway.weekmenu.service.external.dto.IngredientResponseDto;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.maven.model.Build;
 
-public class WeekMenuDtoBuilder {
+public class MenuDtoBuilder {
 
-    private WeekMenuDtoBuilder(){}
+    private MenuDtoBuilder() {
+    }
 
-    public static class Builder{
+    public static class Builder {
+
+        private MenuDto menuDto = new MenuDto();
+
+        private String name;
+
+        private Long id;
 
         private List<IngredientDto> ingredientDtoList = new ArrayList<>();
 
-        public Builder withIngredients(){
+        public Builder withIngredient(IngredientDto ingredientDto) {
+            this.ingredientDtoList.add(ingredientDto);
+            return this;
+        }
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder asPotatoeSoup() {
+            this.withName("Kartoffelsuppe");
+            this.withId(1L);
             final IngredientDto potatoes = new IngredientDto();
             potatoes.setAmount(2.6f);
             potatoes.setId(1L);
             potatoes.setName("Kartoffeln");
-            potatoes.setUnitOfMeasure("g");
+            potatoes.setUnitOfMeasure(UnitOfMeasures.GRAMM);
             final IngredientDto meat = new IngredientDto();
             meat.setAmount(300f);
             meat.setId(2L);
             meat.setName("Schweinefleisch");
-            meat.setUnitOfMeasure("g");
-            ingredientDtoList.add(potatoes);
-            ingredientDtoList.add(meat);
+            meat.setUnitOfMeasure(UnitOfMeasures.GRAMM);
+            this.withIngredient(potatoes);
+            this.withIngredient(meat);
             return this;
         }
 
-        public WeekMenuDto build(){
-            final WeekMenuDto weekMenuDto = new WeekMenuDto();
-            weekMenuDto.setId(1L);
-            weekMenuDto.setName("Kartoffelsuppe");
-            weekMenuDto.setIngredients(this.ingredientDtoList);
-            return weekMenuDto;
+        public MenuDto build() {
+            this.menuDto.setName(this.name);
+            this.menuDto.setId(this.id);
+            this.menuDto.setIngredients(this.ingredientDtoList);
+            return this.menuDto;
         }
     }
 }
