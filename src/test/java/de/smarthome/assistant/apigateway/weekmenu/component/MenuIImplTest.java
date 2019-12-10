@@ -33,7 +33,7 @@ import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuListDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuRequestDto;
 import de.smarthome.assistant.apigateway.weekmenu.persistence.MenuDtoBuilder;
-import de.smarthome.assistant.apigateway.weekmenu.service.external.MenusService;
+import de.smarthome.assistant.apigateway.weekmenu.service.external.MenuServiceImpl;
 import de.smarthome.assistant.apigateway.weekmenu.service.external.dto.MenuListResponseDto;
 import de.smarthome.assistant.apigateway.weekmenu.service.external.dto.MenuResponseDto;
 import java.util.List;
@@ -52,7 +52,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class MenuIImplTest {
 
     @MockBean
-    private MenusService weekMenusService;
+    private MenuServiceImpl weekMenusService;
 
     private MenuListResponseDto menuListResponseDto;
 

@@ -28,16 +28,19 @@ import de.smarthome.assistant.apigateway.weekmenu.controller.dto.DropDownValueLi
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuListDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuRequestDto;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuUpdateRequestDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.util.Enum2DropDownConverter;
 import de.smarthome.assistant.apigateway.weekmenu.model.type.UnitOfMeasures;
 import java.net.URI;
 import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -87,13 +90,37 @@ public class MenusController {
     /**
      * Insert new given {@link MenuDto} into the database
      *
-     * @param weekMenuRequestDto {@link MenuDto}
+     * @param weekMenuRequestDto {@link MenuRequestDto}
      * @return {@link MenuDto}
      */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<MenuDto> insert(@RequestBody MenuRequestDto weekMenuRequestDto) throws ExecutionException, InterruptedException {
         return this.weekMenu.insert(weekMenuRequestDto).get().map(a -> ResponseEntity.created(URI.create("/" + a.getId())).body(a))
                 .orElseGet(() -> ResponseEntity.badRequest().build());
+    }
+
+    /**
+     * Update existing menu in the database
+     *
+     * @param menuUpdateRequestDto {@link MenuUpdateRequestDto}
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(method = RequestMethod.PUT)
+    public ResponseEntity<MenuDto> update(@RequestBody MenuUpdateRequestDto menuUpdateRequestDto)
+            throws ExecutionException, InterruptedException {
+        return this.weekMenu.update(menuUpdateRequestDto).get().map(a -> ResponseEntity.ok().body(a))
+                .orElseGet(() -> ResponseEntity.badRequest().build());
+    }
+
+    /**
+     * Delete menu from database
+     *
+     * @param menuId a menu id
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/{menuId}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("menuId") Long menuId) {
+        this.weekMenu.delete(menuId);
     }
 
     /**

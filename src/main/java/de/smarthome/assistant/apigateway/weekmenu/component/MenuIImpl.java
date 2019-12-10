@@ -28,7 +28,8 @@ import de.smarthome.assistant.apigateway.weekmenu.component.mapper.MenuDtoMapper
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuListDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuRequestDto;
-import de.smarthome.assistant.apigateway.weekmenu.service.external.MenusService;
+import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuUpdateRequestDto;
+import de.smarthome.assistant.apigateway.weekmenu.service.external.MenuServiceI;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import org.springframework.scheduling.annotation.Async;
@@ -37,22 +38,30 @@ import org.springframework.stereotype.Component;
 @Component
 public class MenuIImpl implements MenuI {
 
-    private final MenusService menusService;
+    private final MenuServiceI menuService;
 
-    public MenuIImpl(MenusService menusService) {
-        this.menusService = menusService;
+    public MenuIImpl(MenuServiceI menuService) {
+        this.menuService = menuService;
     }
 
     @Override
     @Async(AsyncConfig.TASK_EXECUTOR_SERVICE)
     public CompletableFuture<Optional<MenuListDto>> getMenuList() {
-        return menusService.getWeekMenuList()
-                .thenApply(a -> a.map(MenuDtoMapper.INSTANCE::menuListResponseDto2MenuListDto));
+        return menuService.getWeekMenuList().thenApply(a -> a.map(MenuDtoMapper.INSTANCE::menuListResponseDto2MenuListDto));
     }
 
     @Override
     public CompletableFuture<Optional<MenuDto>> insert(MenuRequestDto weekMenuRequestDto) {
-        return this.menusService.insert(weekMenuRequestDto)
-                .thenApply(a -> a.map(MenuDtoMapper.INSTANCE::menuResponseDto2MenuDto));
+        return this.menuService.insert(weekMenuRequestDto).thenApply(a -> a.map(MenuDtoMapper.INSTANCE::menuResponseDto2MenuDto));
+    }
+
+    @Override
+    public CompletableFuture<Optional<MenuDto>> update(MenuUpdateRequestDto menuUpdateRequestDto) {
+        return this.menuService.update(menuUpdateRequestDto).thenApply(a -> a.map(MenuDtoMapper.INSTANCE::menuResponseDto2MenuDto));
+    }
+
+    @Override
+    public void delete(Long menuId) {
+        this.menuService.delete(menuId);
     }
 }

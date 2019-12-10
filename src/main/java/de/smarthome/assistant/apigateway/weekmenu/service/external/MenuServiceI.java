@@ -21,22 +21,22 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.apigateway.weekmenu.component;
+package de.smarthome.assistant.apigateway.weekmenu.service.external;
 
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuDto;
-import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuListDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuRequestDto;
 import de.smarthome.assistant.apigateway.weekmenu.controller.dto.MenuUpdateRequestDto;
+import de.smarthome.assistant.apigateway.weekmenu.service.external.dto.MenuListResponseDto;
+import de.smarthome.assistant.apigateway.weekmenu.service.external.dto.MenuResponseDto;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-public interface MenuI {
+public interface MenuServiceI {
 
-    CompletableFuture<Optional<MenuListDto>> getMenuList();
+    CompletableFuture<Optional<MenuListResponseDto>> getWeekMenuList();
 
-    CompletableFuture<Optional<MenuDto>> insert(MenuRequestDto menuDto);
+    CompletableFuture<Optional<MenuResponseDto>> insert(MenuRequestDto weekMenuRequestDto);
 
-    CompletableFuture<Optional<MenuDto>> update(MenuUpdateRequestDto menuUpdateRequestDto);
+    CompletableFuture<Optional<MenuResponseDto>> update(MenuUpdateRequestDto menuUpdateRequestDto);
 
     void delete(Long menuId);
 
