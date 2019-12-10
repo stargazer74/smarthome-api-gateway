@@ -110,4 +110,8 @@ public class MenuIImplTest {
         assertEquals(2, menuDto.get().getIngredients().size());
         assertEquals("Kartoffelsuppe", menuDto.get().getName());
     }
+
+    @Test
+    public void updateSuccessTest() {
+    }
 }

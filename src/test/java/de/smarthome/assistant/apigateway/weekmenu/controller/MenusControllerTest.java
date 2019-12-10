@@ -26,6 +26,7 @@ package de.smarthome.assistant.apigateway.weekmenu.controller;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -81,5 +82,17 @@ public class MenusControllerTest {
     @Test
     public void filteredListSuccessTest() {
         assertTrue(true);
+    }
+
+    @Test
+    public void updateSuccessTest() {
+    }
+
+    @Test
+    public void deleteSuccessTest() throws Exception {
+        /*
+         * test
+         */
+        mockMvc.perform(delete("/week-menus/" + 1L)).andExpect(status().isOk());
     }
 }
