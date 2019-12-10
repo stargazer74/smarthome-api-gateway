@@ -69,7 +69,7 @@ public class MenusControllerTest {
         /*
          * test
          */
-        mockMvc.perform(get("/weekMenus/list").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(
+        mockMvc.perform(get("/week-menus/list").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(
                 jsonPath("$.menuDtos[0].ingredients[0].unitOfMeasure", is(menuDto.getIngredients().get(0).getUnitOfMeasure().name())));
     }
 

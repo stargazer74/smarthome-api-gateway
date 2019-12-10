@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/weekMenus")
+@RequestMapping(value = "/week-menus")
 public class MenusController {
 
     private final MenuI weekMenu;
