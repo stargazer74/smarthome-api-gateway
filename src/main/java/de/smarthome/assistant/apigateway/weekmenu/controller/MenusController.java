@@ -36,7 +36,11 @@ import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,7 +63,7 @@ public class MenusController {
      *
      * @return {@link MenuListDto}
      */
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping(value = "/list")
     public ResponseEntity<MenuListDto> list() throws ExecutionException, InterruptedException {
         return this.weekMenu.getMenuList().get().map(weekMenu -> ResponseEntity.ok().body(weekMenu))
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -71,7 +75,7 @@ public class MenusController {
      * @param id of the menu
      * @return {@link MenuDto}
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public MenuDto get(@PathVariable("id") Long id) {
         return null;
     }
@@ -82,7 +86,7 @@ public class MenusController {
      * @param searchString a search string
      * @return {@link MenuListDto}
      */
-    @RequestMapping(value = "/list/{searchstring}", method = RequestMethod.GET)
+    @GetMapping(value = "/list/{searchstring}")
     public MenuListDto filteredList(@PathVariable("searchstring") String searchString) {
         return null;
     }
@@ -93,7 +97,7 @@ public class MenusController {
      * @param weekMenuRequestDto {@link MenuRequestDto}
      * @return {@link MenuDto}
      */
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public ResponseEntity<MenuDto> insert(@RequestBody MenuRequestDto weekMenuRequestDto) throws ExecutionException, InterruptedException {
         return this.weekMenu.insert(weekMenuRequestDto).get().map(a -> ResponseEntity.created(URI.create("/" + a.getId())).body(a))
                 .orElseGet(() -> ResponseEntity.badRequest().build());
@@ -105,7 +109,7 @@ public class MenusController {
      * @param menuUpdateRequestDto {@link MenuUpdateRequestDto}
      */
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.PUT)
+    @PutMapping
     public ResponseEntity<MenuDto> update(@RequestBody MenuUpdateRequestDto menuUpdateRequestDto)
             throws ExecutionException, InterruptedException {
         return this.weekMenu.update(menuUpdateRequestDto).get().map(a -> ResponseEntity.ok().body(a))
@@ -118,7 +122,7 @@ public class MenusController {
      * @param menuId a menu id
      */
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/{menuId}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{menuId}")
     public void delete(@PathVariable("menuId") Long menuId) {
         this.weekMenu.delete(menuId);
     }
@@ -128,7 +132,7 @@ public class MenusController {
      *
      * @return {@link DropDownValueListDto}
      */
-    @RequestMapping(value = "/units-of-measure", method = RequestMethod.GET)
+    @GetMapping(value = "/units-of-measure")
     public DropDownValueListDto getUnitsOfMeasure() {
         return Enum2DropDownConverter.toDropDownList(UnitOfMeasures.values());
     }
